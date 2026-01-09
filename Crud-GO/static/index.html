@@ -6,8 +6,6 @@
     <title>Manajemen Toko</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
@@ -167,7 +165,6 @@
             <h1>🛍️ Manajemen Toko</h1>
             <p>Sistem CRUD Produk Sederhana</p>
         </div>
-
         <div class="content">
             <div class="form-section">
                 <h2 id="form-title">Tambah Produk Baru</h2>
@@ -178,22 +175,18 @@
                         <label for="name">Nama Produk</label>
                         <input type="text" id="name" placeholder="Contoh: Laptop ASUS" required>
                     </div>
-
                     <div class="form-group">
                         <label for="price">Harga</label>
                         <input type="number" id="price" placeholder="Contoh: 5000000" required>
                     </div>
-
                     <div class="form-group">
                         <label for="stock">Stok</label>
                         <input type="number" id="stock" placeholder="Contoh: 10" required>
                     </div>
-
                     <button type="submit" id="submitBtn">Tambah Produk</button>
                     <button type="button" class="btn-cancel" id="cancelBtn" style="display:none;">Batal</button>
                 </form>
             </div>
-
             <div class="table-section">
                 <h2>Daftar Produk</h2>
                 <table>
@@ -219,8 +212,7 @@
     <script>
         const API_URL = 'http://localhost:8080/api/products';
         let editMode = false;
-
-        // Load products on page load
+        
         loadProducts();
 
         document.getElementById('productForm').addEventListener('submit', async (e) => {
@@ -254,7 +246,6 @@
                     tbody.innerHTML = '<tr class="empty-state"><td colspan="5">Belum ada produk. Silakan tambah produk baru!</td></tr>';
                     return;
                 }
-
                 tbody.innerHTML = products.map(p => `
                     <tr>
                         <td>${p.id}</td>
@@ -271,7 +262,6 @@
                 console.error('Error loading products:', error);
             }
         }
-
         async function createProduct(product) {
             try {
                 const response = await fetch(API_URL, {
@@ -290,7 +280,6 @@
                 alert('Gagal menambahkan produk!');
             }
         }
-
         async function updateProduct(product) {
             try {
                 const id = document.getElementById('productId').value;
@@ -299,7 +288,6 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(product)
                 });
-
                 if (response.ok) {
                     alert('Produk berhasil diupdate!');
                     resetForm();
@@ -323,7 +311,6 @@
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
         async function deleteProduct(id) {
             if (!confirm('Yakin ingin menghapus produk ini?')) return;
 
@@ -341,7 +328,6 @@
                 alert('Gagal menghapus produk!');
             }
         }
-
         function resetForm() {
             editMode = false;
             document.getElementById('productForm').reset();
